@@ -1,0 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Controller;
+
+import Model.CalculatorEngine;
+import View.CalculatorView;
+import java.util.Stack;
+
+/**
+ *
+ * @author rachae
+ */
+public class CalculatorController {
+    private CalculatorEngine engine;
+    private CalculatorView view;
+    
+    public CalculatorController(CalculatorView view){
+        this.view=view;
+        this.engine= new CalculatorEngine();
+    }
+    
+    public void pushElements(Stack input){
+        engine.setElements(view.getElements());
+    }
+    
+    public double calculate(){
+        return engine.calculate();
+    }
+}
