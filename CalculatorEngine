@@ -1,0 +1,72 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Model;
+
+import java.util.Stack;
+
+/**
+ *
+ * @author rachael
+ */
+public class CalculatorEngine {
+    private boolean isScientific;
+    private Stack elements;
+    private double memory;
+    private String res;
+    
+    public CalculatorEngine(){
+    }
+
+    public void setElements(Stack elements) {
+        this.elements = elements;
+    }
+
+    public void clearAll(){
+        this.memory=0.0;
+        this.res="0";
+        this.elements.clear();
+    }
+    
+    public void setMemory(double input){
+        this.memory=input;
+    }
+
+    public double getMemory() {
+        return memory;
+    }
+    
+    public double calculate(){
+        Stack temp=this.elements;
+        Stack operator= new Stack();
+        Stack operand= new Stack();
+        double res=0.0;
+        while(!temp.isEmpty()){
+            if(temp.peek() instanceof String){
+                operator.push(temp.pop());
+            } else {
+                operand.push(temp.pop());
+            }
+        }
+        System.out.println(operand.peek());
+        res= (double) operand.pop();
+        while(!operand.isEmpty()){
+            if(operator.peek().equals("*")){
+                System.out.println(operand.peek());
+                res*=(double) operand.pop();
+            } else if (operator.peek().equals("/")) {
+                res/=(double) operand.pop();
+            } else if (operator.peek().equals("+")) {
+                res+=(double) operand.pop();
+            } else if (operator.peek().equals("-")){
+                res-=(double) operand.pop();
+            }
+            System.out.println(operator.peek());
+            operator.pop();
+        }
+        return res;
+    }
+}
